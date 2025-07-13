@@ -2,12 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const pingRoutes = require('./routes/ping.routes');
+
+
 
 const app = express();
 
 // Middlewares
 app.use(cors());
 app.use(express.json());
+app.use('/api/ping', pingRoutes);
 
 // Rutas
 const authRoutes = require('./routes/auth.routes');
