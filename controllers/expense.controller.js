@@ -15,10 +15,15 @@ exports.createExpense = async (req, res) => {
   paid : paid || false
 });
 
+if (!amount || !description || !category || !date) {
+  return res.status(400).json({ message: 'Faltan campos obligatorios' });
+}
+// Guardar el gasto
     await expense.save();
     res.status(201).json(expense);
   } catch (err) {
-    res.status(500).json({ message: 'Error al crear gasto' });
+    res.status(500).json({ message: 'Error al crear gasto', error: err.message });
+
   }
 };
 
